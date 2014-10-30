@@ -11,7 +11,7 @@ echo "dataDir=/var/zookeeper" >> /opt/zookeeper/conf/zoo.cfg
 echo "clientPort=2181" >> /opt/zookeeper/conf/zoo.cfg
 echo "initLimit=5" >> /opt/zookeeper/conf/zoo.cfg
 echo "syncLimit=2" >> /opt/zookeeper/conf/zoo.cfg 
-for i in `echo "ZOOKEEPER_MAPPING" | sed "s/,/ /g"`
+for i in `echo "$ZOOKEEPER_MAPPING" | sed "s/,/ /g"`
 do
   n=`echo $i | cut -d":" -f 1`
   h=`echo $i | cut -d":" -f 2`
