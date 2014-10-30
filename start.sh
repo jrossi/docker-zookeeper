@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 mkdir -p /var/zookeeper
 if [ "X$ZOOKEEPER_ID" = "X" ]; then
     echo "ZOOKEEPER_ID is required" 
@@ -11,8 +11,9 @@ echo "dataDir=/var/zookeeper" >> /opt/zookeeper/conf/zoo.cfg
 echo "clientPort=2181" >> /opt/zookeeper/conf/zoo.cfg
 echo "initLimit=5" >> /opt/zookeeper/conf/zoo.cfg
 echo "syncLimit=2" >> /opt/zookeeper/conf/zoo.cfg 
-for i in {1..3}; do 
-    echo "server.$i=${ZOOKEEPER_IP_$i}:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
+for i in ${!ZOOKEEPER_IP_*}; do 
+    x=`echo $i | sed "s/.*_IP_//"`
+    echo "server.${x}=${i}:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
 done
 
 
